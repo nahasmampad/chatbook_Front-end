@@ -1,5 +1,3 @@
-
-
 import "./style.css";
 import AdminMenubar from "../../components/admin/AdminMenubar";
 import AdminSidebar from "../../components/admin/AdminSidebar";
@@ -11,10 +9,8 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 
 function UserManagement() {
-
   const [users, setUsers] = useState([]);
   const { user } = useSelector((state) => ({ ...state }));
-  
 
   const getAllUsers = async () => {
     const { data } = await axios.get(
@@ -37,7 +33,7 @@ function UserManagement() {
       <AdminMenubar />
       <div className="admin_wrapper">
         <div className="admin_sidebar_container">
-          <AdminSidebar user/>
+          <AdminSidebar user />
         </div>
         <div className="admin_page_container ">
           <AdminUser users={users} getAllUsers={getAllUsers} />

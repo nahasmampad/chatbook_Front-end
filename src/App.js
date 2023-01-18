@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/login";
 import Profile from "./pages/profile";
+import SavedPost from "./pages/SavedPosts/savedPost";
 import Home from "./pages/home";
 import LoggedInRoutes from "./routes/LoggedInRoutes";
 import AdminRoute from "./routes/AdminRout";
@@ -18,6 +19,9 @@ import Admin from "./pages/admin";
 import AdminUser from "./pages/admin/UserManagement";
 import AdminPost from "./pages/admin/PostManagement";
 import ErrorPage from "./pages/eroor/ErrorPage";
+import AdminReport from "./pages/admin/AdminReport";
+import ReportManagement from "./pages/admin/ReportManagement";
+import ViewPostdetails from "./pages/admin/ViewPostdetails";
 function App() {
   const [visible, setVisible] = useState(false);
   const { user, darkTheme } = useSelector((state) => ({ ...state }));
@@ -55,7 +59,6 @@ function App() {
   };
   return (
     <div className="appMain">
-     
       {visible && (
         <CreatePostPopup
           user={user}
@@ -65,7 +68,6 @@ function App() {
         />
       )}
       <Routes>
-      
         <Route element={<LoggedInRoutes />}>
           <Route
             path="/profile"
@@ -94,6 +96,14 @@ function App() {
             path="/friends/:type"
             element={
               <Friends setVisible={setVisible} getAllPosts={getAllPosts} />
+            }
+            exact
+          />
+
+          <Route
+            path="/savedpost"
+            element={
+              <SavedPost setVisible={setVisible} getAllPosts={getAllPosts} />
             }
             exact
           />
@@ -128,13 +138,13 @@ function App() {
           <Route path="/admin" element={<Admin />} exact />
           <Route path="/admin/users" element={<AdminUser />} />
           <Route path="/admin/posts" element={<AdminPost />} />
+          <Route path="/admin/reports" element={<ReportManagement />} />
+          <Route path="/admin/viewPosts" element={<ViewPostdetails />} />
         </Route>
 
         <Route path="/reset" element={<Reset />} />
-        <Route path="*" element={<ErrorPage/>} />
-
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
-      
     </div>
   );
 }

@@ -21,7 +21,7 @@ function Messanger() {
   const { user } = useSelector((state) => ({ ...state }));
   const [friend, setFriend] = useState("");
   const scrollRef = useRef();
-  const socket = useRef(io("ws://localhost:8900"));
+  const socket = useRef(io("ws://localhost:3001"));
   const getCoversation = async () => {
     try {
       const { data } = await axios.get(
@@ -80,7 +80,7 @@ function Messanger() {
   }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
-    socket.current = io("ws://localhost:8900");
+    socket.current = io("ws://localhost:3001");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,

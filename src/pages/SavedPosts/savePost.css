@@ -1,0 +1,11 @@
+.save_middle{
+margin-top: 60px;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 1rem;
+}
+
+.saved_posts{
+    background-color: #F0F2F5;
+}

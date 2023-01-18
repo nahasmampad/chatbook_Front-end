@@ -7,6 +7,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
+import React, { PureComponent } from 'react';
 
 
 function Admin() {

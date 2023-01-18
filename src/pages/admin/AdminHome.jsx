@@ -1,40 +1,43 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Chart from "../../components/admin/Chart";
 
 
-function AdminHome({users, posts}) {
-  const navigate = useNavigate()
+function AdminHome({ users, posts }) {
+  const navigate = useNavigate();
+  
   return (
-    <div className='admin_home_page'>
+    <div className="admin_home_page">
       <div className="admin_home_container">
         <div className="admin_home_card">
-          <div className="card_head">
-            TOTAL USERS
-          </div>
+          <div className="card_head">TOTAL USERS</div>
 
-          <div className="total_item_count">
-            {users}
-          </div>
+          <div className="total_item_count">{users}</div>
           <div className="view_Details_btn">
-              <button onClick={()=>navigate("/admin/users")}>View Details</button>
+            <button onClick={() => navigate("/admin/users")}>
+              View Details
+            </button>
           </div>
         </div>
 
         <div className="admin_home_card">
-          <div className="card_head">
-            TOTAL POSTS
-          </div>
+          <div className="card_head">TOTAL POSTS</div>
 
-          <div className="total_item_count">
-            {posts}
-          </div>
+          <div className="total_item_count">{posts}</div>
           <div className="view_Details_btn">
-              <button onClick={()=>navigate("/admin/posts")}>View Details</button>
+            <button onClick={() => navigate("/admin/posts")}>
+              View Details
+            </button>
           </div>
         </div>
+      <div className="admin_home_card chart_container ">
+        
+      <Chart users={users} posts={posts}/>  
+    
+      </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default AdminHome
+export default AdminHome;

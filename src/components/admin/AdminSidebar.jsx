@@ -1,7 +1,7 @@
 import { Link, Navigate, NavLink, useNavigate } from "react-router-dom";
 import { Friends, Home, Market, Menu } from "../../svg";
 
-function AdminSidebar({post,home,user}) {
+function AdminSidebar({post,home,user,report}) {
   
   
     const color = '#1876F2'
@@ -31,6 +31,15 @@ function AdminSidebar({post,home,user}) {
           <Market color={color}/>
         </div>
         <span>Posts</span>
+      </div>
+      </Link>
+      
+      <Link to='/admin/reports'>
+      <div className={`admin_menu hover1 ${report ? 'active' :""}`}>
+      <div className="admin_sidebar_icon">
+          <Market color={color}/>
+        </div>
+        <span>Report</span>
       </div>
       </Link>
      

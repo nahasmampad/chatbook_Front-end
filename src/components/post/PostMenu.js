@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import MenuItem from "./MenuItem";
 import useOnClickOutside from "../../helpers/clickOutside";
-import { deletePost, savePost } from "../../functions/post";
+import { deletePost, savePost, reportPost } from "../../functions/post";
 import { saveAs } from "file-saver";
 
 export default function PostMenu({
@@ -27,6 +27,11 @@ export default function PostMenu({
       setCheckSaved(true);
     }
   };
+
+  const handleReport = async () => {
+    reportPost(postId, token)
+  };
+
   const downloadImages = async () => {
     images.map((img) => {
       saveAs(img.url, "image.jpg");
@@ -96,11 +101,13 @@ export default function PostMenu({
       )}
       {!test && <div className="line"></div>}
       {!test && (
-        <MenuItem
+        <div onClick={() => handleReport()} >
+          <MenuItem
           img="../../../icons/report.png"
           title="Report post"
           subtitle="i'm concerned about this post"
         />
+        </div>
       )}
     </ul>
   );

@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 
-function AdminPostMgent({ posts, getAllUserPosts }) {
+function AdminPostMgent({ posts, getAllUserPosts,viewDetails }) {
   const { user } = useSelector((state) => ({ ...state }));
   const postAction = async (id) => {
     const { data } = await axios.get(
@@ -40,6 +40,7 @@ function AdminPostMgent({ posts, getAllUserPosts }) {
                     <td>{post.user.email}</td>
                     <td>{post.block ? "Blocked" : "Active"}</td>
                     <td>
+                      <div className="butten_view_table">
                       <button
                         onClick={() => postAction(post._id)}
                         className={
@@ -48,6 +49,12 @@ function AdminPostMgent({ posts, getAllUserPosts }) {
                       >
                         {post.block ? "Unblock" : "Block"}
                       </button>
+                      <button
+                          onClick={() => viewDetails(post)}
+                          className="blue_btn"
+                        >View</button>
+                      </div>
+                      
                     </td>
                   </tr>
                 </>
