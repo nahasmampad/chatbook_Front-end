@@ -1,10 +1,12 @@
 import axios from "axios";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import block from "../../svg/x-circle-fill.svg";
 
 function AdminUser({ users, getAllUsers }) {
   const { user } = useSelector((state) => ({ ...state }));
+  const [search, setSearch] = useState("");
   const userAction = async (users) => {
     // alert(`are you sure, you want to ${users.block ? "unblock" : "block"} this user?`)
     const conformBox = window.confirm(
@@ -34,6 +36,14 @@ function AdminUser({ users, getAllUsers }) {
       <div className="admin_user_management">
         User <span>Management</span>
       </div>
+      <div className="table_search">
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+       
+      </div>
       <div className="admin_table scrollbar">
         <table className="table_inner">
           <tr>
@@ -43,7 +53,16 @@ function AdminUser({ users, getAllUsers }) {
             <th>Status</th>
             <th>Action</th>
           </tr>
-          {users.map((user, i) => (
+          {users.filter((val) => {
+              if (search === "") {
+                return val;
+              } else if (
+                  val.username.toLowerCase().includes(search.toLowerCase()) ||
+                  val.email.toLowerCase().includes(search.toLowerCase())
+              ){
+                return val
+              }
+            }).map((user, i) => (
             <tr key={i}>
               <td>{i + 1}</td>
               <td>{user.username}</td>

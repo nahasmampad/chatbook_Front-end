@@ -1,10 +1,11 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 
 function AdminPostMgent({ posts, getAllUserPosts,viewDetails }) {
   const { user } = useSelector((state) => ({ ...state }));
+  const [search, setSearch] = useState("");
   const postAction = async (post) => {
     const conformBox = window.confirm(
       `are you sure, you want to ${
@@ -30,6 +31,14 @@ function AdminPostMgent({ posts, getAllUserPosts,viewDetails }) {
       <div className="admin_user_management">
         Post <span>Management</span>
       </div>
+      <div className="table_search">
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+       
+      </div>
       <div className="admin_table scrollbar">
         <table className="table_inner">
           <tr>
@@ -40,7 +49,16 @@ function AdminPostMgent({ posts, getAllUserPosts,viewDetails }) {
             <th>Action</th>
           </tr>
           {posts.length > 0 &&
-            posts.map((post, i) => {
+            posts.filter((val) => {
+              if (search === "") {
+                return val;
+              } else if (
+                  val.user.username.toLowerCase().includes(search.toLowerCase()) ||
+                  val.user.email.toLowerCase().includes(search.toLowerCase())
+              ){
+                return val
+              }
+            }).map((post, i) => {
               return (
                 <>
                   <tr>
