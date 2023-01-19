@@ -5,16 +5,25 @@ import { useSelector } from "react-redux";
 
 function AdminPostMgent({ posts, getAllUserPosts,viewDetails }) {
   const { user } = useSelector((state) => ({ ...state }));
-  const postAction = async (id) => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/blockPost/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      }
+  const postAction = async (post) => {
+    const conformBox = window.confirm(
+      `are you sure, you want to ${
+        post.block ? "unblock" : "block"
+      } this user?`
     );
-    getAllUserPosts();
+
+    if(conformBox){
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/blockPost/${post._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      getAllUserPosts();
+    }
+    
   };
   return (
     <div className="admin_com_header">
@@ -42,7 +51,7 @@ function AdminPostMgent({ posts, getAllUserPosts,viewDetails }) {
                     <td>
                       <div className="butten_view_table">
                       <button
-                        onClick={() => postAction(post._id)}
+                        onClick={() => postAction(post)}
                         className={
                           post.block ? "admin_unblock_btn" : "admin_block_btn"
                         }

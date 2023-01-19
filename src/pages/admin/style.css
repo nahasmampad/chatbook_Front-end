@@ -430,3 +430,31 @@ th {
   /* background-color: var(--bg-secondary); */
   width: 20rem;
 }
+
+.table_search{
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 2rem;
+  background: #fff;
+  width: 250px;
+  height: 40px;
+  margin-bottom: 5px;
+  border-radius: 10px;
+  border: 1px solid var(--blue-color);
+  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
+}
+
+.table_search input{
+  outline: none;
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  font-family: inherit;
+
+}
+
+.table_search div{
+cursor: pointer;
+}

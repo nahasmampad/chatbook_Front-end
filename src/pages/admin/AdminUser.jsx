@@ -1,23 +1,34 @@
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import block from "../../svg/x-circle-fill.svg";
 
 function AdminUser({ users, getAllUsers }) {
   const { user } = useSelector((state) => ({ ...state }));
-  const userAction = async (id) => {
-    const { data } = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/blockUser/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      }
+  const userAction = async (users) => {
+    // alert(`are you sure, you want to ${users.block ? "unblock" : "block"} this user?`)
+    const conformBox = window.confirm(
+      `are you sure, you want to ${
+        users.block ? "unblock" : "block"
+      } this user?`
     );
+    if (conformBox) {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/blockUser/${users._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
 
-    getAllUsers()
-
-    console.log("data=>", data);
+      getAllUsers();
+    }
   };
+  const navigate = useNavigate()
+    const viewDetails =(user)=>{
+      navigate(`/adminProfile/${user.username}`)
+    }
   return (
     <div className="admin_com_header">
       <div className="admin_user_management">
@@ -39,14 +50,24 @@ function AdminUser({ users, getAllUsers }) {
               <td>{user.email}</td>
               <td>{user.block ? "Blocked" : "Active"}</td>
               <td>
-                <button
-                  onClick={() => userAction(user._id)}
-                  className={
-                    user.block ? "admin_unblock_btn" : "admin_block_btn"
-                  }
-                >
-                  {user.block ? "Unblock" : "Block"}
-                </button>
+                <div className="butten_view_table">
+                  <button
+                    onClick={() => userAction(user)}
+                    className={
+                      user.block ? "admin_unblock_btn" : "admin_block_btn"
+                    }
+                  >
+                    {user.block ? "Unblock" : "Block"}
+                  </button>
+
+                  <button
+                    onClick={() => viewDetails(user)}
+                    className="blue_btn"
+                  >
+                    {" "}
+                    View
+                  </button>
+                </div>
               </td>
             </tr>
           ))}

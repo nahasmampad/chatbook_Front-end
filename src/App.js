@@ -140,6 +140,13 @@ function App() {
           <Route path="/admin/posts" element={<AdminPost />} />
           <Route path="/admin/reports" element={<ReportManagement />} />
           <Route path="/admin/viewPosts" element={<ViewPostdetails />} />
+          <Route
+            path="/adminProfile/:username"
+            element={
+              <Profile setVisible={setVisible} getAllPosts={getAllPosts} />
+            }
+            exact
+          />
         </Route>
 
         <Route path="/reset" element={<Reset />} />

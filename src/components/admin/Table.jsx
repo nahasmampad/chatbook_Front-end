@@ -1,20 +1,43 @@
+import axios from "axios";
 import React, { useMemo } from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useTable } from "react-table";
 import ViewPosts from "./ViewPosts";
+import { Search, ArrowDown } from "../../svg";
 
-function Table({ posts, viewDetails }) {
-  
-  const postAction = (post) => {
-    
+function Table({ posts, viewDetails, getReportedPosts }) {
+  const { user } = useSelector((state) => ({ ...state }));
+
+  const postAction = async (post) => {
+    const conformBox = window.confirm(
+      `are you sure, you want to ${post.block ? "unblock" : "block"} this post?`
+    );
+
+    if (conformBox) {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/blockPost/${post._id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        }
+      );
+      getReportedPosts();
+    }
   };
 
- 
-
-  console.log(posts, "posts");
+  
 
   return (
     <div className="table_div_container">
+      <div className="table_search">
+        <input type="text" placeholder="Search" />
+        <div>
+          <Search />
+        </div>
+      </div>
+
       <div className="admin_table scrollbar">
         <table className="table_inner">
           <tr>
@@ -57,7 +80,6 @@ function Table({ posts, viewDetails }) {
             })}
         </table>
       </div>
-     
     </div>
   );
 }

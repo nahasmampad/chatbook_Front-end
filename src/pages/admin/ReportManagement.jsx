@@ -41,7 +41,7 @@ function ReportManagement() {
           <AdminSidebar report />
         </div>
         <div className="admin_page_container ">
-          <AdminReport reports={reports} viewDetails={viewDetails} setShowDetails={setShowDetails} />
+          <AdminReport reports={reports} viewDetails={viewDetails} setShowDetails={setShowDetails} getReportedPosts={getReportedPosts} />
         </div>
       </div>
       {

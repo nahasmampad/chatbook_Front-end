@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import Table from "../../components/admin/Table";
 
-export default function AdminReport({reports, viewDetails,setShowDetails}) {
+export default function AdminReport({reports, viewDetails,setShowDetails,getReportedPosts}) {
    
   
   return (
@@ -12,7 +12,7 @@ export default function AdminReport({reports, viewDetails,setShowDetails}) {
       <div className="admin_user_management">
         Report <span>Management</span>
       </div>
-      <Table posts={reports} viewDetails={viewDetails} />
+      <Table posts={reports} viewDetails={viewDetails} getReportedPosts={getReportedPosts} />
     </div>
   );
 }
