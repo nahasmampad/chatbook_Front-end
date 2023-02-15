@@ -5,6 +5,7 @@ import Login from "../pages/login";
 export default function AdminRoute() {
   const { user } = useSelector((state) => ({ ...state }));
     if(user){
+        console.log("adminamm");
         if(user.admin){
             return <Outlet />
         } else{

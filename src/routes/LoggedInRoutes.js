@@ -3,11 +3,13 @@ import { Navigate, Outlet } from "react-router-dom";
 import Login from "../pages/login";
 
 export default function LoggedInRoutes() {
+  
   const { user } = useSelector((state) => ({ ...state }));
   
 
  if(user){
-  if(user.admin == true){
+  if(user.admin === true){
+    console.log("admin");
     return <Navigate to="/admin" />
   }
   return <Outlet /> 
